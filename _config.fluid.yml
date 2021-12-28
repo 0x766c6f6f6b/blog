@@ -476,7 +476,7 @@ index:
   # 自动截取文章摘要
   # Auto extract post
   auto_excerpt:
-    enable: false
+    enable: true
 
   # 打开文章的标签方式
   # The browser tag to open the post
@@ -796,7 +796,7 @@ cusdis:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-57pgy5.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -808,7 +808,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-6oek9w.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -838,7 +838,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-m9ol79.png
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle:
@@ -856,7 +856,7 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-y8kdvd.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:

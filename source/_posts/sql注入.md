@@ -1,7 +1,7 @@
 ---
 title: SQL注入
 tags: [网络安全]
-index_img: 
+index_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-3z7563.jpg
 banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-g71763.png
 date: 2021-12-10 10:00:00
 
@@ -478,11 +478,7 @@ username 字段的长度为 7。
   `AND if(hex(mid(user(), L, 1)) = N, sleep(3), 1)`
   注：L 的位置代表字符串的第几个字符，N 的位置代表 ASCII 码。
 
-
-
 不仅在 MySQL 中存在延时函数，在 SQL Server、Oracle 等数据库中也都存在类似功能的函数，如 SQL Server 的 waitfor delay、Oracle 中的 DBMS_LOCK.SLEEP 等函数。
-
-
 
 ---
 
@@ -491,7 +487,6 @@ username 字段的长度为 7。
 #### 1.获取元数据
 
 Oracle 也支持查询元数据，下面是 Oracle 注入常用的元数据视图：
-
 
 ```sql
  user_tablespaces 视图，查看表空间
@@ -509,8 +504,6 @@ Oracle 也支持查询元数据，下面是 Oracle 注入常用的元数据视�
  user_objects 视图，查看当前用户的所有对象 (表名称、约束、索引)
 `SELECT object_name FROM user_objects`
 ```
-
-
 
 #### 2.UNION 查询
 
@@ -548,7 +541,5 @@ Oracle 与 MySQL 一样不支持多语句执行，不像 SQL Server 那样可以
   在得知表的列数之后，可以通过查询元数据的方式查询表名称、列名称，然后查询数据，如：
   `http://www.aaa.org/new.jsp?id=1 UNION SELECT username, password, null FROM users --`
   注意：在查询数据时同样要注意数据类型，否则无法查询，只能一一测试，改变参数的查询位置。
-  
-  
 
 原文链接：https://blog.csdn.net/weixin_43915762/article/details/87909751

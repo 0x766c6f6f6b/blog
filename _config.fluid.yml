@@ -797,7 +797,7 @@ cusdis:
 #---------------------------
 archive:
   banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-57pgy5.jpg
-  banner_img_height: 60
+  banner_img_height: 100
   banner_mask_alpha: 0.3
   subtitle:
 
@@ -809,7 +809,7 @@ archive:
 category:
   enable: true
   banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-6oek9w.jpg
-  banner_img_height: 60
+  banner_img_height: 100
   banner_mask_alpha: 0.3
   subtitle:
 
@@ -839,7 +839,7 @@ category:
 tag:
   enable: true
   banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-m9ol79.png
-  banner_img_height: 80
+  banner_img_height: 100
   banner_mask_alpha: 0.3
   subtitle:
   tagcloud:

@@ -122,7 +122,7 @@ SQL语句变为`SELECT * FROM table WHERE username = 'admin' and 1=2 --`
   `SELECT * FROM user WHERE username = 'root' AND password = 'root' HAVING 1 = 1 --`
   
   那么 SQL 的执行器可能会抛出一个错误：
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224191512414.png)
+  ![](https://img-blog.csdnimg.cn/20190224191512414.png)
   
   攻击者就可以发现当前的表名为 ****user****、而且存在字段 ****id****。
   
@@ -132,7 +132,7 @@ SQL语句变为`SELECT * FROM table WHERE username = 'admin' and 1=2 --`
   `SELECT * FROM user WHERE username = 'root' AND password = 'root' GROUP BY users.id HAVING 1 = 1 --`
   
   抛出错误：
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224192110665.png)由此可以看到包含列名 **username**。可以一次递归查询，知道没有错误消息返回位置，这样就可以利用 **HAVING** 字句得到当表的所有列名。
+  ![](https://img-blog.csdnimg.cn/20190224192110665.png)由此可以看到包含列名 **username**。可以一次递归查询，知道没有错误消息返回位置，这样就可以利用 **HAVING** 字句得到当表的所有列名。
   注：Select指定的每一列都应该出现在Group By子句中，除非对这一列使用了聚合函数
 
 + 利用数据类型错误提取数据
@@ -142,7 +142,7 @@ SQL语句变为`SELECT * FROM table WHERE username = 'admin' and 1=2 --`
   `SELECT * FROM user WHERE username = 'abc' AND password = 'abc' AND 1 > (SELECT TOP 1 username FROM users)`
   
   执行器错误提示：
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224193113204.png)
+  ![](https://img-blog.csdnimg.cn/20190224193113204.png)
   
   这就可以获取到用户的用户名为 **root**。因为在子查询 `SELECT TOP 1 username FROM users` 中，将查询到的用户名的第一个返回，返回类型是 **varchar** 类型，然后要跟 **int** 类型的 **1** 比较，两种类型不同的数据无法比较而报错，从而导致了数据泄露。
   
@@ -195,7 +195,7 @@ SQL Server 提供了大量视图，便于取得元数据。可以先猜测出表
 - SELECT * FROM users WHERE id = 1 ORDER BY 4 (按照第四列排序)——SQL 抛出异常
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224203021906.png)
+![ ](https://img-blog.csdnimg.cn/20190224203021906.png)
 
 由此可以得出，当前表的列数只有 3 列，因为当按照第 4 列排序时报错了。在 Oracle 和 MySql 数据库中同样适用此方法。
 
@@ -217,7 +217,7 @@ UNION 关键字将两个或多个查询结果组合为单个结果集，大部�
   在之前假设的 user 表中有 5 列，若我们用 UNION 联合查询：
   `SELECT * FROM users WHERE id = 1 UNION SELECT 1`
   数据库会发出异常：
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224203620105.png)可以通过递归查询，直到无错误产生，就可以得知 User 表的查询字段数：
+  ![ ](https://img-blog.csdnimg.cn/20190224203620105.png)可以通过递归查询，直到无错误产生，就可以得知 User 表的查询字段数：
   `UNION SELECT 1,2、UNION SELECT 1,2,3`
   
   也可以将 **SELECT** 后面的数字改为 **null**、这样不容易出现不兼容的异常。
@@ -379,12 +379,12 @@ MySQL 也存在显错式注入，可以像 SQL Server 数据库那样，使用�
   
   `SELECT * FROM message WHERE id = 1 and updatexml(1, (concat(0x7c, (SELECT @@version))), 1)`
   其中的concat()函数是将其连成一个字符串，因此不会符合XPATH_string的格式，从而出现格式错误，报错，会显示出无法识别的内容：
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/2019022422162974.png)
+  ![ ](https://img-blog.csdnimg.cn/2019022422162974.png)
 
 + 通过 extractvalue函数
   `SEELCT * FROM message WHERE id= 1 AND extravtvalue(1, concat(0x7c, (SELECT user())))`
   同样报错显示出当前用户：
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224222331730.png)
+  ![ ](https://img-blog.csdnimg.cn/20190224222331730.png)
 
 #### 6.宽字节注入
 
@@ -393,16 +393,16 @@ MySQL 也存在显错式注入，可以像 SQL Server 数据库那样，使用�
 在 PHP 配置文件 php.ini 中存在 **magic_quotes_gpc** 选项，被称为魔术引号，当此选项被打开时，**使用 GET、POST、Cookie 所接受的 单引号(’)、双引号(")、反斜线() 和 NULL 字符都会自动加上一个反斜线转义。**
 
 如下使用 PHP 代码使用 $_GET 接收参数：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224223136534.png)
+![ ](https://img-blog.csdnimg.cn/20190224223136534.png)
 
 如访问URL：`http:/www.xxser.com/Get.php?id='`，显示如下：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224223317122.png)
+![ ](https://img-blog.csdnimg.cn/20190224223317122.png)
 
 单引号'被转义后就变成了`\'`，在 MySQL 中，`\'`是一个合法的字符，也就没办法闭合单引号，所以，注入类型是字符型时无法构成注入。
 
 但是若是输入：`%d5'`，访问URL：`http:/www.xxser.com/Get.php?id=%d5'`，显示如下：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2019022422340713.png)
+![ ](https://img-blog.csdnimg.cn/2019022422340713.png)
 
 可以发现，这次单引号没有被转义，这样就可以突破 PHP 转义，继续闭合 SQL 语句进行 SQL 注入。
 
@@ -413,7 +413,7 @@ MySQL 超长字符截断又名 **“SQL-Column-Truncation”**。
 
 假设有一张表如下：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224223849184.png)
+![ ](https://img-blog.csdnimg.cn/20190224223849184.png)
 
 username 字段的长度为 7。
 
@@ -421,27 +421,27 @@ username 字段的长度为 7。
 ① 插入正常 SQL 语句：
 `INSERT users(id, username, password) VALUES(1, 'admin', 'admin');`
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224224006948.png)
+![ ](https://img-blog.csdnimg.cn/20190224224006948.png)
 
 成功插入。
 
 ② 插入错误的 SQL 语句，使 username 字段的长度超过7：
 `INSERT users(id, username, password) VALUES(2, 'admin ', 'admin');`
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224224213520.png)
+![ ](https://img-blog.csdnimg.cn/20190224224213520.png)
 
 虽然有警告，但是成功插入了。
 
 ③ 再尝试插入一条错误的 SQL 语句，长度同一超过原有的规定长度：
 `INSERT users(id, username, password) VALUES(3, 'admin x), 'admin;`
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224224328555.png)
+![ ](https://img-blog.csdnimg.cn/20190224224328555.png)
 
 查询数据库：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224224351430.png)
+![  ](https://img-blog.csdnimg.cn/20190224224351430.png)
 可以看到，三条数据都被插入到数据库中，但是值发生了变化。在默认情况下，如果数据超出默认长度，MySQL 会将其截断。
 
 但是这样怎么攻击呢？通过查询用户名为 admin 的用户：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224224526351.png)
+![  ](https://img-blog.csdnimg.cn/20190224224526351.png)
 可以发现，只查询用户名为 admin 的用户，但是另外两个长度不一致的 admin 用户也被查询出，这样就会造成一些安全问题。
 
 比如有一处管理员登录时这样判断的：
@@ -458,7 +458,7 @@ username 字段的长度为 7。
 就是将在 3 秒后执行该 SQL 语句。
 
 可以使用这个函数来判断 URL 是否存在 SQL 注入漏洞，步骤如下：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190224225212438.png)
+![  ](https://img-blog.csdnimg.cn/20190224225212438.png)
 通过页面返回的世界可以断定，DBMS 执行了 `and sleep(3) `语句，这样一来就可以判断出 URL 存在 SQL 注入漏洞。
 
 然后通过 sleep() 函数还可以读出数据，但需要其他函数的配合，步骤如下：

